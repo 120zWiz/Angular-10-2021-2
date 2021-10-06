@@ -1,0 +1,11 @@
+.price{
+    background-color: lightgray;
+    width: 50px;
+}
+    
+.title{
+    color: lime;
+    font-size: large;
+    border: 1px dotted gray
+}
+    
