@@ -1,0 +1,21 @@
+.navbar{
+    height: 150px;
+    background-color: bisque;
+    /*dispaly: flex paneb k6ik asjad tema sees vasakult paremale
+    justify-content - utleb kuhu ruum jautub
+    space-between*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+ cursor: pointer;
+ height: 100px;
+
+}
+
+.cart-button{
+ cursor: pointer;
+ height: 50px;
+ margin: 50px;
+}
