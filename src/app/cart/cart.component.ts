@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,14 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  //  kooloniga kirjutan tyybi, v6rdusmargiga annan vaartuse
+  cartItems: any[] = [];
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-      // ostukorvi minek - pannakse kaima kui minnakse 
+    // ostukorvi minek - pannakse kaima kui minnakse 
     // selle component htmli peale
+    // see funktsioon laheb enne HTMLi kaima
     // v6tame k6ik esemed mis on ostukorvi lisatud
     console.log("cart componendis");
+
+    this.cartItems = this.cartService.cartItemsInService;
   }
 
 }

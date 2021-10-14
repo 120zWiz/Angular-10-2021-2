@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -16,10 +17,10 @@ export class HomeComponent implements OnInit {
     {price: 1, title: "jalatsid"},
     {price: 2, title: "kindad"},
     {price: 3, title: "joped"},
-    {price: 3, title: "mutsid"},
+    {price: 4, title: "mutsid"},
     
   ]
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     console.log("home componendis");
@@ -29,9 +30,16 @@ export class HomeComponent implements OnInit {
     console.log("item");
     console.log("working");
     console.log(this.objektiMassiiv);
-
     // siin lisame Service-sse kus hoitakse ostukorvi esemeid
     
+    this.cartService.cartItemsInService.push(item);
+   
   }
 
 }
+
+// Siia teem ostukorvist kustutamise 
+//  ja ostukorvi tyhjendamise =[];
+
+// Ostukorvi kogusumma arvutus
+// JavaScript forEach() funktsiooni
