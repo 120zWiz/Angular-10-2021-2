@@ -1,0 +1,8 @@
+<div *ngFor="let item of items" class="item">
+    <div>toode</div>
+    <div class="price">{{ item.price }}</div>
+    <div class="title">{{ item.title }}</div>
+    <div>Pilt</div>
+    <button (click)="onRemoveItem(items)">kustuta toode</button>
+    <br><br>
+</div>

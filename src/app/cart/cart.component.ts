@@ -8,22 +8,28 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
   //  kooloniga kirjutan tyybi, v6rdusmargiga annan vaartuse
+  // tyybiks yksk6ik milline massiv ja vaartuseks tyhi massiiv
+  // ilma tyybita ma ei saa talle algvaartust anda, sest ta peab teadma mille massiv ta on
+
   cartItems: any[] = [];
 
   sumOfCart = 0;
 
   constructor(private cartService: CartService) { }
 
+  // laheb tapselt ennem HTMLi kaimapanemist kaima
   ngOnInit(): void {
     // ostukorvi minek - pannakse kaima kui minnakse 
     // selle component htmli peale
     // see funktsioon laheb enne HTMLi kaima
     // v6tame k6ik esemed mis on ostukorvi lisatud
+    // kuvab brauserisse console i mingisuguse s6numi
+    // parem klik > inspect > console brauseris
     console.log("cart componendis");
 
     this.cartItems = this.cartService.cartItemsInService;
     this.sumOfCart = 0;
-    this.cartItems.forEach(toode => this.sumOfCart = this.sumOfCart + toode.price); 
+    this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.price); 
     // lyhend ylal olevale commandile = this.cartItems.forEach(toode => this.sumOfCart =+ toode.price);
   }                                                
       
@@ -32,12 +38,13 @@ export class CartComponent implements OnInit {
     this.cartItems = this.cartService.cartItemsInService;
   }
 
-  onDeleteFromCart(ese: any) {
+  onDeleteFromCart(item: any) {
     // siin on mingi esemete massiiv nt. hind ja pealkiri 
-    let j2rjekorranumber = this.cartService.cartItemsInService.indexOf(ese);
-    this.cartService.cartItemsInService.splice(j2rjekorranumber,1);
+    let index = this.cartService.cartItemsInService.indexOf(item);
+    console.log(index)
+    this.cartService.cartItemsInService.splice(index,1);
     this.sumOfCart = 0;
-    this.cartItems.forEach(toode => this.sumOfCart = this.sumOfCart + toode.price);
+    this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.price);
   }
 
 }

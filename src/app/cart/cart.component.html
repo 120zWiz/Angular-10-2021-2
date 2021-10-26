@@ -1,17 +1,21 @@
+<!-- ngif- naitab siis kui on avaldis true (v6i muutuja) -->
 <button *ngIf="cartItems.length >0" (click)="onEmptyCart()">Tyhjenda ostukorv</button>
 
 <br><br>
 
-<div *ngIf="cartItems.length ==0">Ostukorv on tyhi</div>
+<!-- kaks v6rdusmarki- kysib kas vasak pool on v6rdne parema poolega. -->
+<div *ngIf="cartItems.length == 0">Ostukorv on tyhi</div>
 
-<div *ngFor="let ese of cartItems" class="item">
+<!-- ngfor- Esimene tegu on otsida yles muutuja "of" jarel
+otsitakse component.ts failist -->
+<div *ngFor="let cartItem of cartItems" class="item">
     <div>toode</div>
-    <div class="price">{{ ese.price }}</div>
-    <div class="title">{{ ese.title }}</div>
+    <div class="price">{{ cartItem.price }}</div>
+    <div class="title">{{ cartItem.title }}</div>
     <div>pilt</div>
-    <button (click)="onDeleteFromCart(ese)">kustuta toode</button>
+    <button (click)="onDeleteFromCart(cartItem)">kustuta toode</button>
     
-    <br>
+    <br><br>
 </div>
 
 <div *ngIf="cartItems.length >0">Ostukorvi kogu summa on {{ sumOfCart }} EUR</div>
