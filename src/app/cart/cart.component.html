@@ -12,7 +12,7 @@ otsitakse component.ts failist -->
     <div>toode</div>
     <div class="price">{{ cartItem.price }}</div>
     <div class="title">{{ cartItem.title }}</div>
-    <div>pilt</div>
+    <img src="{{ cartItem.imgSrc }}" alt=""><br>
     <button (click)="onDeleteFromCart(cartItem)">kustuta toode</button>
     
     <br><br>

@@ -6,6 +6,7 @@ import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
+import { ViewComponent } from './home/view/view.component';
 
 const routes: Routes = [
   // URL path brauseris:"localhost:4200", HomeComponent sisu koos HTML-ga,
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "admin/lisa-ese", component: AddItemComponent },
   { path: "admin/esemed", component: ViewItemsComponent },
   { path: "admin/muuda-ese", component: EditItemComponent },
+  { path: "toode/:itemId", component: ViewComponent },
   
   
 ];

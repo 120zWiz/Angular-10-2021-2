@@ -2,9 +2,10 @@
     <div>toode</div>
     <div class="price">{{ ese.price }}</div>
     <div class="title">{{ ese.title }}</div>
+    <img routerLink="toode/{{ese.id}}" src="{{ ese.imgSrc }}" alt="">
     <div>pilt</div>
     <button (click)="lisaOstukorvi(ese)">Lisa ostukorvi</button>
-    <br>
+    <br><br>
 </div>
 
 <!-- <div *ngFor="let pealkiri of pealkirjad">

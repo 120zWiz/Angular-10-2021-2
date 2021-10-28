@@ -1,2 +1,17 @@
-<form (ngSubmit)="onSubmit()" #form="ngForm">
+<!-- 1. onSubmit() peab siduma end .ts failis oleva täpselt sama nimetusega funktsiooniga
+2. peab ka olema täpselt sama palju muutujaid saadetud -->
+<form (ngSubmit)="onSubmit(esemeLisamiseVorm)" #esemeLisamiseVorm="ngForm">
+    <label>Id</label> <br>
+    <input ngModel name="id" type="number" required> <br><br>
+    <label>Nimetus</label> <br>
+    <input ngModel name="title" type="text" required> <br><br>
+    <label>Hind</label> <br>
+    <input ngModel name= "price" type="number" required> <br><br>
+    <label>Pilt</label> <br>
+    <input ngModel name="imgSrc" type="text" required> <br><br>
+    <label>Kategooria</label> <br>
+    <input ngModel name="category" type="text" required> <br><br>
+    <label>Nähtav</label> <br>
+    <input ngModel name="isActive" type="checkbox"> <br><br>
+    <button [disabled]="esemeLisamiseVorm.invalid">Lisa toode</button> <br>
 </form>
