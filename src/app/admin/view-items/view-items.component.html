@@ -2,7 +2,8 @@
     <div>toode</div>
     <div class="price">{{ item.price }}</div>
     <div class="title">{{ item.title }}</div>
-    <img src="{{ item.imgSrc }}" alt=""><br>
-    <button (click)="onRemoveItem(items)">kustuta toode</button>
+    <div>src="{{ item.imgSrc }}" alt=""</div>
+    <button (click)="onRemoveItem(items)">Kustuta toode</button>
+    <button routerLink="/admin/muuda-ese/{{item.id}}">Muuda</button>
     <br><br>
 </div>

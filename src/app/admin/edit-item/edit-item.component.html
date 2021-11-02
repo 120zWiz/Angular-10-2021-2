@@ -1,1 +1,15 @@
-<p>edit-item works!</p>
+<form (ngSubmit)="onSubmit(editItemForm)" [formGroup]="editItemForm">
+    <label>Id</label> <br>
+    <input formControlName="id" type="number" required> <br><br>
+    <label>Nimetus</label> <br>
+    <input formControlName="title" type="text" required> <br><br>
+    <label>Hind</label> <br>
+    <input formControlName="price" type="number" required> <br><br>
+    <label>Pilt</label> <br>
+    <input formControlName="imgSrc" type="text" required> <br><br>
+    <label>Kategooria</label> <br>
+    <input formControlName="category" type="text" required> <br><br>
+    <label>Nähtav</label> <br>
+    <input formControlName="isActive" type="checkbox"> <br><br>
+    <button [disabled]="editItemForm.invalid">Lisa toode</button> <br>
+</form>
