@@ -8,7 +8,9 @@
     <label>Pilt</label> <br>
     <input formControlName="imgSrc" type="text" required> <br><br>
     <label>Kategooria</label> <br>
-    <input formControlName="category" type="text" required> <br><br>
+    <select formControlName="category">
+        <option *ngFor="let category of categories" value="{{ category }}">{{ category }}</option>
+        </select>
     <label>Nähtav</label> <br>
     <input formControlName="isActive" type="checkbox"> <br><br>
     <button [disabled]="editItemForm.invalid">Lisa toode</button> <br>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ItemService } from 'src/app/services/item.service';
 export class EditItemComponent implements OnInit {
   item: any;
   editItemForm: any;
+  categories: any [] = []
   // app-routingus lisa kooloni järgi muutuja (nagu toode/:esemeId)
   // mine view-items.html failis routerLink edit-item ja lisa sinna ID
         // nagu home.html-s routerLink="toode/{{toode.id}}"
@@ -18,19 +20,20 @@ export class EditItemComponent implements OnInit {
   // tehke siia ühendus ActivatedRoute klassiga
   // tehke ühendus ka ItemService klassiga
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute) { }
+  constructor(private itemService: ItemService, 
+    private route: ActivatedRoute,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get("itemId");
-      // siin tehke URL-st pilt ja võtke URL parameeter ning pange let muutujasse
-    // ! console.log , et id saadi kätte
-    // .find() abil leidke õige toode ItemService seest
-    console.log(id)
+    let urlId = this.route.snapshot.paramMap.get("itemId");
+    this.categories = this.categoryService.categoriesInService;
+    console.log(urlId)
     
     
-    this.item = this.itemService.itemsInService.find(item => item.id == id);
+    this.item = this.itemService.itemsInService.find(item => item.id == urlId);
     console.log(this.item);
     
+    // values, valid, invalid, controls, touched, untouched
     this.editItemForm = new FormGroup ({
       id: new FormControl(this.item.id),
       title: new FormControl(this.item.title),

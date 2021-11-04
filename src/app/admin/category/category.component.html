@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit(addCategoryForm)" #addCategoryForm="ngForm">
+<label>Katekooria</label> <br>
+    <input ngModel name="category" type="text" required> <br><br>
+    <button [disabled]="addCategoryForm.invalid">Lisa kategooria</button> <br>
+</form>
+    
+<br><br>
+<div *ngFor="let category of categories"><br>
+<div>{{ category }}</div>
+<button (click)=" onDeleteCategory(category)">Kustuta kategooria</button>
+</div>

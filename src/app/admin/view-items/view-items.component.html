@@ -1,8 +1,9 @@
 <div *ngFor="let item of items" class="item">
-    <div>toode</div>
+    <div>Id: {{ item.id }}</div>
     <div class="price">{{ item.price }}</div>
     <div class="title">{{ item.title }}</div>
     <div>src="{{ item.imgSrc }}" alt=""</div>
+    <div>{{ item.category}}</div>
     <button (click)="onRemoveItem(items)">Kustuta toode</button>
     <button routerLink="/admin/muuda-ese/{{item.id}}">Muuda</button>
     <br><br>

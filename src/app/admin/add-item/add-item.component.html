@@ -10,7 +10,10 @@
     <label>Pilt</label> <br>
     <input ngModel name="imgSrc" type="text" required> <br><br>
     <label>Kategooria</label> <br>
-    <input ngModel name="category" type="text" required> <br><br>
+    <select name="category">
+        <option *ngFor="let category of categories" value="{{ category }}">{{ category }}</option>
+        </select>
+      <br>
     <label>Nähtav</label> <br>
     <input ngModel name="isActive" type="checkbox"> <br><br>
     <button [disabled]="esemeLisamiseVorm.invalid">Lisa toode</button> <br>
