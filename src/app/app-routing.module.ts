@@ -18,7 +18,7 @@ const routes: Routes = [
   // kui on brauseris "localhost:4200", siis näitab cart.component.html-i ja lisasid
   { path: "ostukorv", component: CartComponent },
   { path: "admin", component: AdminHomeComponent },
-  { path: "admin/kategooriad", component: CategoryComponent },
+  { path: "admin/kategooria", component: CategoryComponent },
   { path: "admin/lisa-ese", component: AddItemComponent },
   { path: "admin/esemed", component: ViewItemsComponent },
   { path: "admin/muuda-ese/:itemId", component: EditItemComponent },
