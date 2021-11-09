@@ -4,7 +4,10 @@
 <br><br>
 
 <!-- kaks v6rdusmarki- kysib kas vasak pool on v6rdne parema poolega. -->
-<div *ngIf="cartItems.length == 0">Ostukorv on tyhi</div>
+<div *ngIf="cartItems.length == 0">
+<div>Ostukorv on tyhi</div>
+<img src="assets/shopping-cart.png" alt="">
+</div>
 
 <!-- ngfor- Esimene tegu on otsida yles muutuja "of" jarel
 otsitakse component.ts failist -->

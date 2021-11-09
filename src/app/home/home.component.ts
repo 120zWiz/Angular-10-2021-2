@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../models/item.model';
 import { CartService } from '../services/cart.service';
 import { ItemService } from '../services/item.service';
 
@@ -33,23 +34,41 @@ export class HomeComponent implements OnInit {
 
   objekt = {price: 150, title: "sss111"}
 
-  objektiMassiiv: any[] = [];
+  items: Item[] = [];
   constructor(private cartService: CartService, 
     private itemService:ItemService) { }
 
   ngOnInit(): void {
     console.log("home componendis");
-    this.objektiMassiiv = this.itemService.itemsInService;
+    this.items = this.itemService.itemsInService;
   }
 
-  lisaOstukorvi(item: any) {
+  onAddToCart(item: Item) {
     console.log("item");
     console.log("working");
-    console.log(this.objektiMassiiv);
+    console.log(this.items);
     // siin lisame Service-sse kus hoitakse ostukorvi esemeid
     
     this.cartService.cartItemsInService.push(item);
    
+  }
+
+  onSortByTitleAsc() {
+    // this.items.forEach(igaESE => {}) -teeb k6ik l2bi.
+    // this.items.find(igaESE => {}) - teeb niikaua kuni leiab
+    this.items.sort((currentItem, nextItem)=> currentItem.title.localeCompare(nextItem.title));
+  }
+
+  onSortByTitleDesc() {
+    this.items.sort((currentItem, nextItem)=> nextItem.title.localeCompare(currentItem.title));
+  }
+
+  onSortByPriceAsc() {
+    this.items.sort((currentItem, nextItem)=> currentItem.price - nextItem.price);
+  }
+
+  onSortByPriceDesc() {
+    this.items.sort((currentItem, nextItem)=> nextItem.price - currentItem.price);
   }
 
 }

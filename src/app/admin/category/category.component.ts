@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  categories: any [] = [];
+  categories: string [] = [];
 
   constructor(private categoryService: CategoryService) { }
 
@@ -15,13 +16,13 @@ export class CategoryComponent implements OnInit {
     this.categories = this.categoryService.categoriesInService;
   }
 
-  onDeleteCategory(category: any) {
+  onDeleteCategory(category: string) {
     let index = this.categoryService.categoriesInService.indexOf(category);
     console.log(index)
     this.categoryService.categoriesInService.splice(index,1);
   }
 
-  onSubmit(form: any) {
+  onSubmit(form: NgForm) {
     console.log(form)
     if (form.valid) {
     this.categoryService.categoriesInService.push(form.value.category)

@@ -1,6 +1,6 @@
 <!-- 1. onSubmit() peab siduma end .ts failis oleva täpselt sama nimetusega funktsiooniga
 2. peab ka olema täpselt sama palju muutujaid saadetud -->
-<form (ngSubmit)="onSubmit(esemeLisamiseVorm)" #esemeLisamiseVorm="ngForm">
+<form (ngSubmit)="onSubmit(addItemForm)" #addItemForm="ngForm">
     <label>Id</label> <br>
     <input ngModel name="id" type="number" required> <br><br>
     <label>Nimetus</label> <br>
@@ -16,5 +16,5 @@
       <br>
     <label>Nähtav</label> <br>
     <input ngModel name="isActive" type="checkbox"> <br><br>
-    <button [disabled]="esemeLisamiseVorm.invalid">Lisa toode</button> <br>
+    <button [disabled]="addItemForm.invalid">Lisa toode</button> <br>
 </form>

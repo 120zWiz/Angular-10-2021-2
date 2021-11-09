@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../models/item.model';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class CartComponent implements OnInit {
   // tyybiks yksk6ik milline massiv ja vaartuseks tyhi massiiv
   // ilma tyybita ma ei saa talle algvaartust anda, sest ta peab teadma mille massiv ta on
 
-  cartItems: any[] = [];
+  cartItems: Item[] = [];
 
   sumOfCart = 0;
 
@@ -36,9 +37,10 @@ export class CartComponent implements OnInit {
   onEmptyCart() {
     this.cartService.cartItemsInService = [];
     this.cartItems = this.cartService.cartItemsInService;
+    this.sumOfCart = 0;
   }
 
-  onDeleteFromCart(item: any) {
+  onDeleteFromCart(item: Item) {
     // siin on mingi esemete massiiv nt. hind ja pealkiri 
     let index = this.cartService.cartItemsInService.indexOf(item);
     console.log(index)

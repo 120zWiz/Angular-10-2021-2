@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Item } from 'src/app/models/item.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -10,9 +11,9 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./edit-item.component.css']
 })
 export class EditItemComponent implements OnInit {
-  item: any;
-  editItemForm: any;
-  categories: any [] = []
+  item!: Item;
+  editItemForm!: FormGroup;
+  categories: string[] = []
   // app-routingus lisa kooloni järgi muutuja (nagu toode/:esemeId)
   // mine view-items.html failis routerLink edit-item ja lisa sinna ID
         // nagu home.html-s routerLink="toode/{{toode.id}}"
@@ -25,12 +26,16 @@ export class EditItemComponent implements OnInit {
     private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    let urlId = this.route.snapshot.paramMap.get("itemId");
+    let urlId = Number(this.route.snapshot.paramMap.get("itemId"));
     this.categories = this.categoryService.categoriesInService;
     console.log(urlId)
     
     
-    this.item = this.itemService.itemsInService.find(item => item.id == urlId);
+    let itemFound = this.itemService.itemsInService.find(item => item.id == urlId);
+    if (itemFound) {
+    this.item = itemFound;
+    }
+  
     console.log(this.item);
     
     // values, valid, invalid, controls, touched, untouched
@@ -45,7 +50,7 @@ export class EditItemComponent implements OnInit {
     })
   }
 
-  onSubmit(form: any) {
+  onSubmit(form: FormGroup) {
     console.log(form);
     let j2rjekorraNumber = this.itemService.itemsInService.findIndex(toode => toode.id == form.value.id);
     console.log(j2rjekorraNumber);

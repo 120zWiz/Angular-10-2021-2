@@ -1,10 +1,16 @@
-<div *ngFor="let ese of objektiMassiiv" class="item">
+<button (click)="onSortByTitleAsc()">Järjesta A-Z</button>
+<button (click)="onSortByTitleDesc()">Järjesta Z-A</button>
+<button (click)="onSortByPriceAsc()">Järjesta odavamast</button>
+<button (click)="onSortByPriceDesc()">Järjesta kallimast</button>
+
+<br><br><br>
+
+<div *ngFor="let item of items" class="item">
     <div>toode</div>
-    <div class="price">{{ ese.price }}</div>
-    <div class="title">{{ ese.title }}</div>
-    <img routerLink="toode/{{ese.id}}" src="{{ ese.imgSrc }}" alt="">
-    <div>pilt</div>
-    <button (click)="lisaOstukorvi(ese)">Lisa ostukorvi</button>
+    <div class="price">{{ item.price }}</div>
+    <div class="title">{{ item.title }}</div>
+    <img routerLink="toode/{{item.id}}" src="{{ item.imgSrc }}" alt="">
+    <button (click)="onAddToCart(item)">{{"Lisa ostukorvi" | translate}}</button>
     <br><br>
 </div>
 

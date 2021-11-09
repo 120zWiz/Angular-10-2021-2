@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-item: any;
+item!: Item;
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService) { }
@@ -28,7 +29,7 @@ item: any;
  //              3. teeb pildi (snapshot) - Angular toonitab, et hilisemaid URL muutusi arvesse ei võeta
     //              4. võtan URL parameetrite võti-väärtus paarid (paramMap abil)
     //              5. võti-väärtus paaridest võtan võtme "esemeId", mis peab olema sama mis app-routingus
-    let id = this.route.snapshot.paramMap.get("itemId");
+    let id = Number(this.route.snapshot.paramMap.get("itemId"));
     console.log(id);
 
     // let id = 3;
@@ -40,7 +41,10 @@ item: any;
                     // {hind:200,id:"3"}
 // this.item = {hind:200,id:"3"}
 
-    this.item = this.itemService.itemsInService.find(item => item.id == id);
+    let itemFound = this.itemService.itemsInService.find(item => item.id == id);
+    if (itemFound) {
+      this.item = itemFound;
+    }
     console.log(this.item);
   }
 

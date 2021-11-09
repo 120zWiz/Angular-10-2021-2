@@ -4,7 +4,7 @@
     <div class="title">{{ item.title }}</div>
     <div>src="{{ item.imgSrc }}" alt=""</div>
     <div>{{ item.category}}</div>
-    <button (click)="onRemoveItem(items)">Kustuta toode</button>
+    <button (click)="onDeleteItem(item)">Kustuta toode</button>
     <button routerLink="/admin/muuda-ese/{{item.id}}">Muuda</button>
     <br><br>
 </div>
