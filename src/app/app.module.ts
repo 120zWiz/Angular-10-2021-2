@@ -16,6 +16,8 @@ import { CategoryComponent } from './admin/category/category.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { ItemPricePipe } from './pipes/item-price.pipe';
+import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 
 
 
@@ -30,7 +32,9 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     ViewItemsComponent,
     NavbarComponent,
     ViewComponent,
-    CategoryComponent
+    CategoryComponent,
+    ItemPricePipe,
+    ShortenTitlePipe
   ],
   imports: [
     FormsModule,

@@ -1,14 +1,18 @@
-<button (click)="onSortByTitleAsc()">Järjesta A-Z</button>
-<button (click)="onSortByTitleDesc()">Järjesta Z-A</button>
-<button (click)="onSortByPriceAsc()">Järjesta odavamast</button>
-<button (click)="onSortByPriceDesc()">Järjesta kallimast</button>
-
+<input type="range" min="0" max="15" [(ngModel)]="wordCount">
+<!-- <div>{{ date | date: 'shortTime' }}</div>
+<div>{{ hind | currency: 'EUR' }}</div>
+<div>{{ protsent | percent }}</div>
+<div>{{ lause | uppercase }}</div>
+<div>{{ nimi | titlecase }}</div>
+<br> -->
+<button (click)="onSortByPrice()">Järjesta hinna j2rgi</button>
+<button (click)="onSortByTitle()">Järjesta t2hestiku j2rgi</button>
 <br><br><br>
 
 <div *ngFor="let item of items" class="item">
     <div>toode</div>
-    <div class="price">{{ item.price }}</div>
-    <div class="title">{{ item.title }}</div>
+    <div class="price">{{ item.price | itemPrice }}</div>
+    <div class="title">{{ item.title | shortenTitle:wordCount }}</div>
     <img routerLink="toode/{{item.id}}" src="{{ item.imgSrc }}" alt="">
     <button (click)="onAddToCart(item)">{{"Lisa ostukorvi" | translate}}</button>
     <br><br>

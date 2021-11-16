@@ -1,6 +1,6 @@
 <div *ngFor="let item of items" class="item">
     <div>Id: {{ item.id }}</div>
-    <div class="price">{{ item.price }}</div>
+    <div class="price">{{ item.price | itemPrice }}</div>
     <div class="title">{{ item.title }}</div>
     <div>src="{{ item.imgSrc }}" alt=""</div>
     <div>{{ item.category}}</div>

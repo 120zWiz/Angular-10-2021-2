@@ -34,7 +34,16 @@ export class HomeComponent implements OnInit {
 
   objekt = {price: 150, title: "sss111"}
 
+  // date = new Date();
+  // hind = 500.99;
+  // protsent = 0.78;
+  // lause = "Tere tulemast";
+  // nimi = "reimo morozov";
+
   items: Item[] = [];
+  sortTitleAsc = true;
+  sortPriceAsc = true;
+  wordCount = 4;
   constructor(private cartService: CartService, 
     private itemService:ItemService) { }
 
@@ -53,24 +62,25 @@ export class HomeComponent implements OnInit {
    
   }
 
-  onSortByTitleAsc() {
-    // this.items.forEach(igaESE => {}) -teeb k6ik l2bi.
-    // this.items.find(igaESE => {}) - teeb niikaua kuni leiab
-    this.items.sort((currentItem, nextItem)=> currentItem.title.localeCompare(nextItem.title));
+  onSortByTitle() {
+    if (this.sortTitleAsc){
+      this.items.sort((currentItem, nextItem)=> currentItem.title.localeCompare(nextItem.title));
+      this.sortTitleAsc = false;
+    } else {
+      this.items.sort((currentItem, nextItem)=> nextItem.title.localeCompare(currentItem.title));
+      this.sortTitleAsc = true;
+    }
   }
 
-  onSortByTitleDesc() {
-    this.items.sort((currentItem, nextItem)=> nextItem.title.localeCompare(currentItem.title));
-  }
-
-  onSortByPriceAsc() {
-    this.items.sort((currentItem, nextItem)=> currentItem.price - nextItem.price);
-  }
-
-  onSortByPriceDesc() {
-    this.items.sort((currentItem, nextItem)=> nextItem.price - currentItem.price);
-  }
-
+  onSortByPrice() {
+    if (this.sortPriceAsc){
+      this.items.sort((currentItem, nextItem)=> currentItem.price - nextItem.price);
+      this.sortPriceAsc = false;
+    } else { 
+      this.items.sort((currentItem, nextItem)=> nextItem.price - currentItem.price);
+      this.sortPriceAsc = true;
+    }
+  } 
 }
 
 // Siia teem ostukorvist kustutamise 
