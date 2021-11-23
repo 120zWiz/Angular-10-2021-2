@@ -14,6 +14,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories = this.categoryService.categoriesInService;
+    
   }
 
   onDeleteCategory(category: string) {
@@ -28,5 +29,9 @@ export class CategoryComponent implements OnInit {
     this.categoryService.categoriesInService.push(form.value.category)
     }
   }
+
+  onAddCaegorysToDatabase() {
+    this.categoryService.addCategorysToDatabase().subscribe();
+  } 
   
 }

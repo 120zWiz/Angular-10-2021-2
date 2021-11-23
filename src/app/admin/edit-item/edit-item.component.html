@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(editItemForm)" [formGroup]="editItemForm">
+<form *ngIf="editItemForm" (ngSubmit)="onSubmit()" [formGroup]="editItemForm">
     <label>Id</label> <br>
     <input formControlName="id" type="number" required> <br><br>
     <label>Nimetus</label> <br>

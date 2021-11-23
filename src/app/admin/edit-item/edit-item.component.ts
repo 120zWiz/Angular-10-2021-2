@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
@@ -23,9 +23,14 @@ export class EditItemComponent implements OnInit {
 
   constructor(private itemService: ItemService, 
     private route: ActivatedRoute,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDb =>{
+    this.itemService.itemsInService = itemsFromDb;
+    
+
     let urlId = Number(this.route.snapshot.paramMap.get("itemId"));
     this.categories = this.categoryService.categoriesInService;
     console.log(urlId)
@@ -48,13 +53,17 @@ export class EditItemComponent implements OnInit {
       isActive: new FormControl(this.item.isActive),
       
     })
+  })
   }
 
-  onSubmit(form: FormGroup) {
-    console.log(form);
-    let j2rjekorraNumber = this.itemService.itemsInService.findIndex(toode => toode.id == form.value.id);
-    console.log(j2rjekorraNumber);
-    this.itemService.itemsInService[j2rjekorraNumber] = form.value;
+  onSubmit() {
+     if (this.editItemForm.valid) {
+     let index = this.itemService.itemsInService.indexOf(this.item);
+     this.itemService.itemsInService[index] = this.editItemForm.value;
+     this.itemService.addItemsToDatabase().subscribe(()=>{
+      this.router.navigateByUrl("/admin/esemed");
+     });
+    }
   }
 
 }

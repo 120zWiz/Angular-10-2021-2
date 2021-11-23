@@ -13,7 +13,11 @@ export class ViewItemsComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.items = this.itemService.itemsInService;
+    // this.items = this.itemService.itemsInService;(kood ilma andmebaasita)
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDb =>{
+      this.items = itemsFromDb;
+      this.itemService.itemsInService = itemsFromDb;
+    })
   }
 
   onDeleteItem(item:Item ) {
@@ -22,7 +26,13 @@ export class ViewItemsComponent implements OnInit {
     let index = this.itemService.itemsInService.indexOf(item);
     console.log(index)
     this.itemService.itemsInService.splice(index,1);
+    this.items.splice(index,1);
+    this.itemService.addItemsToDatabase().subscribe();
     
   }
+
+   onAddItemsToDatabase() {
+     this.itemService.addItemsToDatabase().subscribe();
+   } 
 
 }
