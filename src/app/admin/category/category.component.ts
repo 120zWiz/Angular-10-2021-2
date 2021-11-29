@@ -13,8 +13,13 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categories = this.categoryService.categoriesInService;
-    
+    // this.categories = this.categoryService.categoriesInService;
+    this.categoryService.getCategorysFromDatabase().subscribe(catFromDb =>{
+      if (catFromDb) {
+        this.categories = catFromDb;
+        this.categoryService.categoriesInService = catFromDb;
+      }
+    })
   }
 
   onDeleteCategory(category: string) {
@@ -26,7 +31,9 @@ export class CategoryComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log(form)
     if (form.valid) {
-    this.categoryService.categoriesInService.push(form.value.category)
+    this.categoryService.categoriesInService.push(form.value.category);
+    // this.categories.push(form.value.category);
+    this.categoryService.addCategorysToDatabase().subscribe();
     }
   }
 

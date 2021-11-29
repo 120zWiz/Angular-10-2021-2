@@ -16,23 +16,35 @@ export class ViewItemsComponent implements OnInit {
     // this.items = this.itemService.itemsInService;(kood ilma andmebaasita)
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDb =>{
       this.items = itemsFromDb;
-      this.itemService.itemsInService = itemsFromDb;
+      this.itemService.updateItems(itemsFromDb);
     })
   }
 
   onDeleteItem(item:Item ) {
     
-    // siin on mingi esemete massiiv nt. hind ja pealkiri 
-    let index = this.itemService.itemsInService.indexOf(item);
-    console.log(index)
-    this.itemService.itemsInService.splice(index,1);
-    this.items.splice(index,1);
-    this.itemService.addItemsToDatabase().subscribe();
+   this.itemService.deleteItem(item);
+   this.itemService.addItemsToDatabase().subscribe(() => {
+     alert("kustutatud");
+   })
+    
     
   }
 
    onAddItemsToDatabase() {
      this.itemService.addItemsToDatabase().subscribe();
    } 
+
+   onChangeActive(item: Item) {
+    // let index = this.itemService.itemsInService.indexOf(item);
+    // let itemChange = this.itemService.itemsInService[index];
+  //  itemChange.isActive = !itemChange.isActive;
+   item.isActive = !item.isActive;
+   this.itemService.addItemsToDatabase().subscribe();
+
+
+  //  let index2 = this.itemService.itemsInService.indexOf(item);
+    // let itemChange2 = this.itemService.itemsInService[index2].isActive = !this.itemService.itemsInService[index2].isActive;
+  //  this.itemService.addItemsToDatabase().subscribe();
+   }
 
 }

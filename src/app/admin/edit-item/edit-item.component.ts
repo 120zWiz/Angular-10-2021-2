@@ -28,15 +28,15 @@ export class EditItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDb =>{
-    this.itemService.itemsInService = itemsFromDb;
+    this.itemService.updateItems(itemsFromDb);
     
 
-    let urlId = Number(this.route.snapshot.paramMap.get("itemId"));
+    let itemId = Number(this.route.snapshot.paramMap.get("itemId"));
     this.categories = this.categoryService.categoriesInService;
-    console.log(urlId)
+   
     
     
-    let itemFound = this.itemService.itemsInService.find(item => item.id == urlId);
+    let itemFound = this.itemService.findItem(itemId);
     if (itemFound) {
     this.item = itemFound;
     }
@@ -58,8 +58,7 @@ export class EditItemComponent implements OnInit {
 
   onSubmit() {
      if (this.editItemForm.valid) {
-     let index = this.itemService.itemsInService.indexOf(this.item);
-     this.itemService.itemsInService[index] = this.editItemForm.value;
+     this.itemService.editItem(this.item, this.editItemForm.value);
      this.itemService.addItemsToDatabase().subscribe(()=>{
       this.router.navigateByUrl("/admin/esemed");
      });

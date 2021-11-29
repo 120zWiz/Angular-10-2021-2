@@ -10,12 +10,13 @@
 <br><br><br>
 
 <div *ngFor="let item of items" class="item">
-    <div>toode</div>
+    <div *ngIf="item.isActive" [ngClass]="{active: item.isActive, inactive: !item.isActive}">
+        <div>toode</div>
     <div class="price">{{ item.price | itemPrice }}</div>
-    <div class="title">{{ item.title | shortenTitle:wordCount }}</div>
+    <div c="title">{{ item.title | shortenTitle:wordCount }}</div>
     <img routerLink="toode/{{item.id}}" src="{{ item.imgSrc }}" alt="">
     <button (click)="onAddToCart(item)">{{"Lisa ostukorvi" | translate}}</button>
-    <br><br>
+    <br><br></div>
 </div>
 
 <!-- <div *ngFor="let pealkiri of pealkirjad">

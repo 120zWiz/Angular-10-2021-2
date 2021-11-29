@@ -52,17 +52,14 @@ export class HomeComponent implements OnInit {
     // this.items = this.itemService.itemsInService;(kood ilma andmebaasita)
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDb =>{
       this.items = itemsFromDb;
-      this.itemService.itemsInService = itemsFromDb;
+      this.itemService.updateItems(itemsFromDb);
     })
   }
 
   onAddToCart(item: Item) {
-    console.log("item");
-    console.log("working");
-    console.log(this.items);
     // siin lisame Service-sse kus hoitakse ostukorvi esemeid
-    
     this.cartService.cartItemsInService.push(item);
+    this.cartService.cartChanged.next();
    
   }
 

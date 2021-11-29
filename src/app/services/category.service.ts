@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CategoryService {
-  categoriesInService = [ 'Running', 'Outdoors', 'Sneakers'];
+  categoriesInService: string[] = [];
+  // categoriesInService = [ 'Running', 'Outdoors', 'Sneakers'];
 
   constructor(private http: HttpClient) { }
 

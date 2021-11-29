@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
     this.cartService.cartItemsInService = [];
     this.cartItems = this.cartService.cartItemsInService;
     this.sumOfCart = 0;
+    this.cartService.cartChanged.next();
   }
 
   onDeleteFromCart(item: Item) {
@@ -47,6 +48,7 @@ export class CartComponent implements OnInit {
     this.cartService.cartItemsInService.splice(index,1);
     this.sumOfCart = 0;
     this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.price);
+    this.cartService.cartChanged.next();
   }
 
 }

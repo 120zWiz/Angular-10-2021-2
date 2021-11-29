@@ -41,7 +41,7 @@ item!: Item;
                     // {hind:200,id:"3"}
 // this.item = {hind:200,id:"3"}
 
-    let itemFound = this.itemService.itemsInService.find(item => item.id == id);
+    let itemFound = this.itemService.findItem(id);
     if (itemFound) {
       this.item = itemFound;
     }
