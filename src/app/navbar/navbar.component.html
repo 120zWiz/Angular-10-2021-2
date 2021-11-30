@@ -1,6 +1,7 @@
 <div class="navbar">
     <img class="logo" routerLink="/" src="assets/pood.png" alt="">
-    <button routerLink="admin">{{"Admini vaatesse" | translate}}</button>
+    <button *ngIf="isLoggedIn" routerLink="admin">{{"Admini vaatesse" | translate}}</button>
+    <button *ngIf="isLoggedIn" (click)="onLogout()" >Logi v2lja</button>
     <button (click)="useLanguage('en')">en</button>
     <button (click)="useLanguage('ee')">ee</button>    
     <img class="cart-button" routerLink="ostukorv" src="assets/shopping-cart.png" alt="">

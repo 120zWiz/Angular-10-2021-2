@@ -18,6 +18,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ItemPricePipe } from './pipes/item-price.pipe';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 
@@ -34,7 +36,9 @@ import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
     ViewComponent,
     CategoryComponent,
     ItemPricePipe,
-    ShortenTitlePipe
+    ShortenTitlePipe,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     FormsModule,
