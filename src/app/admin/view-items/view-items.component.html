@@ -1,6 +1,15 @@
 <!-- <button (click)="onAddItemsToDatabase()">LISA andmed databaasi</button> -->
+<br><br>
 
-<div *ngFor="let item of items" [ngClass]="{active: item.isActive, inactive: !item.isActive}">
+<label for="">Otsi toodet:</label>
+<input (keyup)="onSearch()" 
+[(ngModel)]="searchedItem" 
+type="text">
+{{ searchedItem }}
+
+<br><br>
+
+<div *ngFor="let item of items"  class="item" [ngClass]="{active: item.isActive, inactive: !item.isActive}">
     <div>Id: {{ item.id }}</div>
     <div (click)="onChangeActive(item)">
     <div>{{ item.price | itemPrice }}</div>

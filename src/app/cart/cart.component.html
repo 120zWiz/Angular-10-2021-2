@@ -13,9 +13,13 @@
 otsitakse component.ts failist -->
 <div *ngFor="let cartItem of cartItems" class="item">
     <div>toode</div>
-    <div class="price">{{ cartItem.price  | itemPrice }}</div>
-    <div class="title">{{ cartItem.title }}</div>
-    <img src="{{ cartItem.imgSrc }}" alt=""><br>
+    <button (click)=onDeleteOneFromCart(cartItem)>-</button>
+    <button (click)=onAddToCart(cartItem)>+</button>
+    <div class="price">{{ cartItem.quantity }}</div>
+    <div class="price">{{ cartItem.cartItem.price * cartItem.quantity  | itemPrice }}</div>
+    <div class="price">{{ cartItem.cartItem.price  | itemPrice }}</div>
+    <div class="title">{{ cartItem.cartItem.title }}</div>
+    <img src="{{ cartItem.cartItem.imgSrc }}" alt=""><br>
     <button (click)="onDeleteFromCart(cartItem)">kustuta toode</button>
     
     <br><br>

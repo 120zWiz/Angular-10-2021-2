@@ -9,6 +9,7 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ViewItemsComponent implements OnInit {
   items: Item[] = [];
+  searchedItem = "";
 
   constructor(private itemService: ItemService) { }
 
@@ -18,6 +19,18 @@ export class ViewItemsComponent implements OnInit {
       this.items = itemsFromDb;
       this.itemService.updateItems(itemsFromDb);
     })
+  }
+  
+  onSearch() {
+    this.items.forEach((item,i) => {
+      let itemDiv = document.getElementsByClassName("item")[i] as HTMLElement;
+      if (item.title.toString().toLowerCase().indexOf(this.searchedItem.toLowerCase()) > -1 ||
+      item.id.toString().indexOf(this.searchedItem) > -1 ) {
+        itemDiv.style.display = "";
+      } else {
+        itemDiv.style.display = "none";
+      }  
+    });
   }
 
   onDeleteItem(item:Item ) {

@@ -9,6 +9,13 @@ import { ItemService } from '../services/item.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  images = [
+    {url: `https://picsum.photos/id/700/900/500`, header: "h1", text: "t1", alt: "a1"},
+    {url: `https://picsum.photos/id/700/900/500`, header: "h2", text: "t2", alt: "a2"},
+    {url: `https://picsum.photos/id/700/900/500`, header: "h3", text: "t3", alt: "a3"},
+    {url: `https://picsum.photos/id/700/900/500`, header: "h4", text: "t4", alt: "a4"}
+  ]
+  // images = [23,45.33].map((n) => `https://picsum.photos/id/${n}/900/500`);
   // teisip. teeme 4 uut componenti admin kausta
   // *eseme jaoks
   // *eseme muutmise jaoks
@@ -56,9 +63,28 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  // onSearch() {
+  //   this.items.forEach((item,i) => {
+  //     let itemDiv = document.getElementsByClassName("item")[i] as HTMLElement;
+  //     if (item.title.toString().toLowerCase().indexOf(this.searchedItem.toLowerCase()) > -1 ||
+  //     item.id.toString().indexOf(this.searchedItem) > -1 ) {
+  //       itemDiv.style.display = "";
+  //     } else {
+  //       itemDiv.style.display = "none";
+  //     }  
+  //   });
+  // }
+
   onAddToCart(item: Item) {
     // siin lisame Service-sse kus hoitakse ostukorvi esemeid
-    this.cartService.cartItemsInService.push(item);
+    let cartIndex = this.cartService.cartItemsInService.findIndex(cartItem => cartItem.cartItem.id == item.id)
+    if (cartIndex > -1) {
+      this.cartService.cartItemsInService[cartIndex].quantity++;
+
+    } else {
+
+    this.cartService.cartItemsInService.push({cartItem: item, quantity: 1});
+    }
     this.cartService.cartChanged.next();
    
   }

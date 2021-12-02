@@ -20,6 +20,8 @@ import { ItemPricePipe } from './pipes/item-price.pipe';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './admin/carousel/carousel.component';
 
 
 
@@ -38,7 +40,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     ItemPricePipe,
     ShortenTitlePipe,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CarouselComponent
   ],
   imports: [
     FormsModule,
@@ -52,7 +55,8 @@ import { SignupComponent } from './auth/signup/signup.component';
                 useFactory: HttpLoaderFactory,
                 deps: [HttpClient]
             }
-        })
+        }),
+        NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

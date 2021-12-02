@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth/auth.service';
+import { Item } from '../models/item.model';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartChanged.subscribe(() => {
       this.sumOfCart = 0;
       this.cartService.cartItemsInService.forEach(cartItem =>
-         this.sumOfCart = this.sumOfCart + cartItem.price); 
+         this.sumOfCart = this.sumOfCart + cartItem.cartItem.price * cartItem.quantity); 
     });
     let language = localStorage.getItem("language");
     if (language) {

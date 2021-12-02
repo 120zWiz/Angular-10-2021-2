@@ -6,7 +6,7 @@ import { Item } from '../models/item.model';
   providedIn: 'root'
 })
 export class CartService {
-  cartItemsInService: Item[] = [];
+  cartItemsInService: {cartItem: Item, quantity: number }[] = [];
   cartChanged = new Subject();
 
 

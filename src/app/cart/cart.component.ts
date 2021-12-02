@@ -12,7 +12,7 @@ export class CartComponent implements OnInit {
   // tyybiks yksk6ik milline massiv ja vaartuseks tyhi massiiv
   // ilma tyybita ma ei saa talle algvaartust anda, sest ta peab teadma mille massiv ta on
 
-  cartItems: Item[] = [];
+  cartItems: {cartItem: Item, quantity: number }[] = [];
 
   sumOfCart = 0;
 
@@ -29,10 +29,11 @@ export class CartComponent implements OnInit {
     console.log("cart componendis");
 
     this.cartItems = this.cartService.cartItemsInService;
-    this.sumOfCart = 0;
-    this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.price); 
-    // lyhend ylal olevale commandile = this.cartItems.forEach(toode => this.sumOfCart =+ toode.price);
-  }                                                
+    this.calculateSumOfCart();
+    
+  }  
+  
+  
       
   onEmptyCart() {
     this.cartService.cartItemsInService = [];
@@ -41,14 +42,32 @@ export class CartComponent implements OnInit {
     this.cartService.cartChanged.next();
   }
 
-  onDeleteFromCart(item: Item) {
-    // siin on mingi esemete massiiv nt. hind ja pealkiri 
-    let index = this.cartService.cartItemsInService.indexOf(item);
-    console.log(index)
+  onDeleteOneFromCart(cartItem:{cartItem: Item, quantity: number}) {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
+      this.calculateSumOfCart();
+    } else {
+      this.onDeleteFromCart(cartItem);
+    }
+  }
+
+  onDeleteFromCart(cartItem:{cartItem: Item, quantity: number}) {
+    let index = this.cartService.cartItemsInService.indexOf(cartItem);
     this.cartService.cartItemsInService.splice(index,1);
+    this.calculateSumOfCart();
+  }
+
+  onAddToCart(cartItem:{cartItem: Item, quantity: number}) {
+    cartItem.quantity++;
+    this.calculateSumOfCart();
+   
+    
+  }
+
+  private calculateSumOfCart() {
     this.sumOfCart = 0;
-    this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.price);
-    this.cartService.cartChanged.next();
+    this.cartItems.forEach(cartItem => this.sumOfCart = this.sumOfCart + cartItem.cartItem.price * cartItem.quantity);
+    this.cartService.cartChanged.next()
   }
 
 }
