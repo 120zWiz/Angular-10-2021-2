@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth/auth.service';
-import { Item } from '../models/item.model';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -15,14 +15,20 @@ export class NavbarComponent implements OnInit {
 
   constructor(private translate: TranslateService,
     private cartService: CartService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = sessionStorage.getItem("userData") != null;
     this.authService.loggedInChanged.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
-    });
-    console.log("ostukorvi kogusumma")
+      })
+      if (this.cookieService.get("products")) {
+        this.cartService.cartItemsInService = JSON.parse(this.cookieService.get("products"));
+        this.sumOfCart = this.cartService.calculateSumOfCart();
+      }
+    
+    
     this.cartService.cartChanged.subscribe(() => {
       this.sumOfCart = 0;
       this.cartService.cartItemsInService.forEach(cartItem =>
@@ -42,5 +48,6 @@ export class NavbarComponent implements OnInit {
     this.translate.use(language);
     localStorage.setItem("language",language)
 }
+
 
 }

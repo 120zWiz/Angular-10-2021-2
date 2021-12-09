@@ -11,4 +11,12 @@ export class CartService {
 
 
   constructor() { }
+  
+  
+  calculateSumOfCart() {
+    let sumOfCart = 0;
+    this.cartItemsInService.forEach(cartItem => sumOfCart = sumOfCart + cartItem.cartItem.price * cartItem.quantity);
+    this.cartChanged.next();
+    return sumOfCart;
+  }
 }

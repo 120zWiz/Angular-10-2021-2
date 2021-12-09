@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Item } from '../models/item.model';
 import { CartService } from '../services/cart.service';
 
@@ -16,7 +17,8 @@ export class CartComponent implements OnInit {
 
   sumOfCart = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+    private cookieService: CookieService) { }
 
   // laheb tapselt ennem HTMLi kaimapanemist kaima
   ngOnInit(): void {
@@ -26,10 +28,13 @@ export class CartComponent implements OnInit {
     // v6tame k6ik esemed mis on ostukorvi lisatud
     // kuvab brauserisse console i mingisuguse s6numi
     // parem klik > inspect > console brauseris
-    console.log("cart componendis");
-
-    this.cartItems = this.cartService.cartItemsInService;
-    this.calculateSumOfCart();
+    // this.cartItems = this.cartService.cartItemsInService;
+    if (this.cookieService.get("products")) {
+      this.cartItems = JSON.parse(this.cookieService.get("products"));
+    } else {
+      this.cartItems = this.cartService.cartItemsInService;
+    }
+    this.sumOfCart = this.cartService.calculateSumOfCart();
     
   }  
   
@@ -40,26 +45,36 @@ export class CartComponent implements OnInit {
     this.cartItems = this.cartService.cartItemsInService;
     this.sumOfCart = 0;
     this.cartService.cartChanged.next();
+    this.cookieService.set("products",JSON.stringify(this.cartService.cartItemsInService));
   }
 
   onDeleteOneFromCart(cartItem:{cartItem: Item, quantity: number}) {
     if (cartItem.quantity > 1) {
+      let index = this.cartService.cartItemsInService.findIndex(item => item.cartItem.id == cartItem.cartItem.id);
+      this.cartService.cartItemsInService[index].quantity--;
+      this.cartItems = this.cartService.cartItemsInService;
       cartItem.quantity--;
-      this.calculateSumOfCart();
+      this.sumOfCart = this.cartService.calculateSumOfCart();
     } else {
       this.onDeleteFromCart(cartItem);
     }
+    this.cookieService.set("products",JSON.stringify(this.cartService.cartItemsInService));
   }
 
   onDeleteFromCart(cartItem:{cartItem: Item, quantity: number}) {
     let index = this.cartService.cartItemsInService.indexOf(cartItem);
     this.cartService.cartItemsInService.splice(index,1);
-    this.calculateSumOfCart();
+    this.sumOfCart = this.cartService.calculateSumOfCart();
+    this.cookieService.set("products",JSON.stringify(this.cartService.cartItemsInService));
   }
 
   onAddToCart(cartItem:{cartItem: Item, quantity: number}) {
+    let index = this.cartService.cartItemsInService.findIndex(item => item.cartItem.id == cartItem.cartItem.id);
+    this.cartService.cartItemsInService[index].quantity++;
+    this.cartItems = this.cartService.cartItemsInService;
     cartItem.quantity++;
-    this.calculateSumOfCart();
+    this.sumOfCart = this.cartService.calculateSumOfCart();
+    this.cookieService.set("products",JSON.stringify(this.cartService.cartItemsInService));
    
     
   }

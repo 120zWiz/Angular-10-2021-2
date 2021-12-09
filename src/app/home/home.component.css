@@ -1,5 +1,5 @@
 .price{
-    background-color: lightgray;
+    background-color: transparent;
     width: 50px;
 }
     
@@ -9,3 +9,24 @@
     border: 1px dotted gray
 }
 
+.carousel-wrapper {
+    width: 80%;
+    margin: 5% 10%;
+
+}
+
+.picsum-img-wrapper {
+    width: 100%;
+    height: 500px;
+
+}
+
+.picsum-img-wrapper img {
+    width: 100%;
+
+}
+
+.newProduct {
+    background-color: rgb(136, 241, 136);
+    width: 25%;
+}

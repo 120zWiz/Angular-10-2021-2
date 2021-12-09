@@ -1,4 +1,4 @@
-<ngb-carousel *ngIf="images">
+<ngb-carousel class="carousel-wrapper" *ngIf="images">
     <ng-template *ngFor="let image of images" ngbSlide>
       <div class="picsum-img-wrapper">
         <img src="{{image.url}}" alt="Random first slide">
@@ -9,8 +9,12 @@
       </div>
     </ng-template>
   </ngb-carousel>
+  
+  
+  <input type="range" min="0" max="15" [(ngModel)]="wordCount">
 
-<input type="range" min="0" max="15" [(ngModel)]="wordCount">
+
+
 <!-- <div>{{ date | date: 'shortTime' }}</div>
 <div>{{ hind | currency: 'EUR' }}</div>
 <div>{{ protsent | percent }}</div>
@@ -32,14 +36,8 @@ type="text">
 <button (click)="onSortByTitle()">Järjesta t2hestiku j2rgi</button>
 <br><br><br>
 
-<div *ngFor="let item of items" class="item">
-    <div *ngIf="item.isActive" [ngClass]="{active: item.isActive, inactive: !item.isActive}">
-        <div>toode</div>
-    <div class="price">{{ item.price | itemPrice }}</div>
-    <div c="title">{{ item.title | shortenTitle:wordCount }}</div>
-    <img routerLink="toode/{{item.id}}" src="{{ item.imgSrc }}" alt="">
-    <button (click)="onAddToCart(item)">{{"Lisa ostukorvi" | translate}}</button>
-    <br><br></div>
+<div *ngFor="let item of items" class="item"  [ngClass]="{newProduct: item.title.toLowerCase().startsWith('new')}">
+    <app-item-card [item] = item [wordCount] = wordCount></app-item-card>
 </div>
 
 <!-- <div *ngFor="let pealkiri of pealkirjad">

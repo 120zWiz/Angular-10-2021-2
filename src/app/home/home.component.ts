@@ -76,17 +76,7 @@ export class HomeComponent implements OnInit {
   // }
 
   onAddToCart(item: Item) {
-    // siin lisame Service-sse kus hoitakse ostukorvi esemeid
-    let cartIndex = this.cartService.cartItemsInService.findIndex(cartItem => cartItem.cartItem.id == item.id)
-    if (cartIndex > -1) {
-      this.cartService.cartItemsInService[cartIndex].quantity++;
-
-    } else {
-
-    this.cartService.cartItemsInService.push({cartItem: item, quantity: 1});
-    }
-    this.cartService.cartChanged.next();
-   
+    
   }
 
   onSortByTitle() {

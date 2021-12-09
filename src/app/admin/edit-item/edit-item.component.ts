@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -45,11 +45,11 @@ export class EditItemComponent implements OnInit {
     
     // values, valid, invalid, controls, touched, untouched
     this.editItemForm = new FormGroup ({
-      id: new FormControl(this.item.id),
+      id: new FormControl(this.item.id,Validators.required),
       title: new FormControl(this.item.title),
       price: new FormControl(this.item.price),
       category: new FormControl(this.item.category),
-      imgSrc: new FormControl(this.item.imgSrc),
+      imgSrc: new FormControl(this.item.imgSrc,[Validators.required,Validators.pattern(/^\S*$/)]),
       isActive: new FormControl(this.item.isActive),
       
     })

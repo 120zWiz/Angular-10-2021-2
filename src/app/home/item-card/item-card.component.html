@@ -1,0 +1,9 @@
+<div *ngIf="item.isActive" [ngClass]="{active: item.isActive, inactive: !item.isActive}">
+    <!-- <div>Toode</div> -->
+<div class="price">{{ item.price | itemPrice }}</div>
+<div c="title">{{ item.title | shortenTitle:wordCount }}</div>
+<img routerLink="toode/{{item.id}}" src="{{ item.imgSrc }}" alt="">
+<button (click)="onAddToCart(item)">{{"Lisa ostukorvi" | translate}}</button>
+<br><br></div>
+
+

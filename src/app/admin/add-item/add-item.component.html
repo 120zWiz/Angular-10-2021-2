@@ -3,6 +3,7 @@
 <form (ngSubmit)="onSubmit(addItemForm)" #addItemForm="ngForm">
     <label>Id</label> <br>
     <input ngModel name="id" type="number" required> <br><br>
+    <textarea name="title"type="text" appDynamicHeight required></textarea><br>
     <label>Nimetus</label> <br>
     <input ngModel name="title" type="text" required> <br><br>
     <label>Hind</label> <br>
